@@ -45,4 +45,11 @@ class User extends Authenticatable
     protected $attributes = [
         'role' => 'regular',
     ];
+
+    public function toAdmin()
+    {
+        // return $this;
+        $this->role = "admin";
+        $this->save();
+    }
 }
