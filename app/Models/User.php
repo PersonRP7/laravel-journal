@@ -52,8 +52,4 @@ class User extends Authenticatable
         $this->save();
     }
 
-    public function allUsers()
-    {
-        return User::all();
-    }
 }
