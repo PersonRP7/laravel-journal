@@ -48,8 +48,12 @@ class User extends Authenticatable
 
     public function toAdmin()
     {
-        // return $this;
         $this->role = "admin";
         $this->save();
+    }
+
+    public function allUsers()
+    {
+        return User::all();
     }
 }
