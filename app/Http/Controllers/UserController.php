@@ -12,7 +12,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    // public function index()
+    // {
+    //     $users = User::all();
+    //     // return view('journal.see_all_users', compact('users', 'users'));
+    //     return view('users.see_all_users', compact('users', 'users'));
+    // }
+
+    public function see_all_users()
     {
         $users = User::all();
         // return view('journal.see_all_users', compact('users', 'users'));

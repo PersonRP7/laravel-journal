@@ -25,7 +25,7 @@ Route::get('/', function () {
     return view('journal.home');
 })->name('home');
 
-
+Route::get('/see_all_users', [UserController::class, 'see_all_users']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
