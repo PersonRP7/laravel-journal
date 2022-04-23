@@ -41,6 +41,21 @@
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
           </li>
         </ul>
+
+        @if(Auth::guest())
+          <a href="{{ route('login') }}" class="nav-link">Login</a> / 
+          <a href="{{ route('register') }}" class="nav-link">Register</a>
+        @else
+          <!-- <a href="#" class="nav-link">My Profile</a> -->
+            <a href="#" class="nav-link">My Profile</a>
+
+            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+            
+            <form class="nav-link" id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        @endif
+
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
