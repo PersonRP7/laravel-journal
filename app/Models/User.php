@@ -52,4 +52,20 @@ class User extends Authenticatable
         $this->save();
     }
 
+    public function changeName(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|unique:users'
+        ],[
+            'name.unique' => 'This name already exists.'
+        ]);
+
+        $user = User::find($id);
+        $user->name = $request->get('name');
+
+        $user->update();
+
+        return redirect('/my_profile')->with('success', 'Name changed to ' . $bird->name);
+    }
+
 }
