@@ -35,4 +35,5 @@ Route::get('/my_profile', function () {
     return view('users.my_profile');
 })->middleware(['auth'])->name('my_profile');
 
+
 require __DIR__.'/auth.php';
