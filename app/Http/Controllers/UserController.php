@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -18,6 +19,19 @@ class UserController extends Controller
     //     // return view('journal.see_all_users', compact('users', 'users'));
     //     return view('users.see_all_users', compact('users', 'users'));
     // }
+
+    public function my_profile(Request $request)
+    {
+        // $user = $request->user;
+        $user = Auth::user();
+        return view('users.my_profile', compact('user', 'user'));
+    }
+
+    public function manage_users(Request $request)
+    {
+        $users = User::all();
+        return view('users.manage_users', compact('users', 'users'));
+    }
 
     public function see_all_users()
     {
