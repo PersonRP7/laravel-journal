@@ -31,14 +31,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-#This route is returning a template view.
-#It should be connected to a controller.
-// Route::get('/my_profile', function () {
-//     return view('users.my_profile');
-// })->middleware(['auth'])->name('my_profile');
-
 Route::get('/my_profile', [UserController::class, 'my_profile'])->
 middleware(['auth'])->name('my_profile');
 
+Route::get('/manage_users', [UserController::class, 'manage_users'])->
+middleware(['auth'])->name('manage_users');
 
 require __DIR__.'/auth.php';
