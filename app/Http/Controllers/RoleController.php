@@ -36,7 +36,19 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'role' => 'required|unique:roles'
+        ], [
+            'role.unique' => 'That role already exists.'
+        ]);
+
+
+        $role = new Role([
+            'role' => $request->post('role')
+        ]);
+
+        $role->save();
+        return redirect('/roles')->with('success', "{$role['role']} created.");
     }
 
     /**
