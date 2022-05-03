@@ -44,8 +44,10 @@
                     @foreach ($roles as $role)
                         <tr>
                             <td>{{ $role->id }}</td>
-                             <td>{{ $role->role }}</td>
-                            <td><a href="{{ route('roles.show', $role->id) }}">{{ $role->created_at }}</a></td>
+                             {{-- <td>{{ $role->role }}</td> --}}
+                             <td><a href="{{ route('roles.show', $role->id) }}">{{ $role->role }}</a></td>
+                            {{-- <td><a href="{{ route('roles.show', $role->id) }}">{{ $role->created_at }}</a></td> --}}
+                            <td>{{ $role->created_at }}</td>
                             <td><a class="btn btn-outline-info" href="{{ route('roles.edit', $role->id) }}">Edit</a></td>
                             <td>
                                 <form action="{{ route('roles.destroy', $role->id) }}" method="POST">
