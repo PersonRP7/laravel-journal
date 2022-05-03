@@ -15,7 +15,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('bird.list', compact('roles', 'roles'));
+        return view('roles.list', compact('roles', 'roles'));
     }
 
     /**
