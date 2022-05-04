@@ -40,4 +40,6 @@ middleware(['auth'])->name('manage_users');
 #Routes
 Route::resource('roles', 'App\Http\Controllers\RoleController');
 
+Route::resource('users', UserController::class);
+
 require __DIR__.'/auth.php';
