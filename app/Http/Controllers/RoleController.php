@@ -82,7 +82,18 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'role' => 'required|unique:roles'
+        ],[
+            'role.unique' => 'That role already exists.'
+        ]);
+
+        $role = Role::find($id);
+        $role->role = $request->get('role');
+
+        $role->update();
+
+        return redirect('/roles')->with('success', 'Role renamed to ' . $role->role);
     }
 
     /**
