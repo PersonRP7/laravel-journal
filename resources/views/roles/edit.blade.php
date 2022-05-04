@@ -25,7 +25,7 @@
                 @method('PATCH')
                 @csrf
                 <label for="role" class="form-label">Modify role</label>
-                <input type="text" placeholder="{{ $role->role }}"" name="role" class="form-control" id="role" aria-describedby="role">
+                <input type="text" placeholder="{{ $role->role }}" name="role" class="form-control" id="role" aria-describedby="role">
                 <div id="emailHelp" class="form-text">Edit role</div>
                 <button type="submit" class="btn btn-outline-info">Modify</button>
             </form>
