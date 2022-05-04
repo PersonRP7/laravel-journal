@@ -20,6 +20,12 @@ class UserController extends Controller
     //     return view('users.see_all_users', compact('users', 'users'));
     // }
 
+    public function index()
+    {
+        $users = User::all();
+        return view('users.list', compact('users', 'users'));
+    }
+
     public function my_profile(Request $request)
     {
         // $user = $request->user;
