@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 
 class UserController extends Controller
@@ -68,8 +69,49 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:users|max:255',
+            'password' => 'required|confirmed|min:6',
+            'email' => 'required|unique:users',
+            'role' => 'required'
+          ]);
+
+          if ($validator->fails()) {
+            return redirect('users/create')
+                     ->withErrors($validator)
+                     ->withInput();
+          }else {
+            $user = new User([
+                'name' => $request->post('name'),
+                'email' => $request->post('email'),
+                'password' => $request->post('password'),
+                'role' => $request->post('role'),
+            ]);
+
+            $user->save();
+            return redirect('/users')->with('success', "{$user['name']} created.");
+          }
     }
+    // public function store(Request $request)
+    // {
+    //     $request->validate(
+    //         ['name' => 'required|unique:users'], 
+    //         ['name.unique' => 'That name already exists.'],
+    //         ['password' => 'required|confirmed|min:6'],
+    //         ['email' => 'required|unique:users'],
+    //         ['email.required' => 'Email must be entered.'],
+    //         ['email.unique' => 'That e-mail already exists.']
+    //     );
+    //     // $user = new User([
+    //     //     'name' => $request->post('name'),
+    //     //     'email' => $request->post('email'),
+    //     //     'password' => $request->post('password'),
+    //     //     'role' => $request->post('role'),
+    //     // ]);
+
+    //     // $user->save();
+    //     // return redirect('/users')->with('success', "{$user['name']} created.");
+    // }
 
     /**
      * Display the specified resource.
