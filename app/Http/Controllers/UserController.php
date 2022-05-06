@@ -7,6 +7,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class UserController extends Controller
 {
     /**
@@ -54,10 +55,11 @@ class UserController extends Controller
      */
     public function create()
     {
+        // use the isEmpty property on the collection
         $roles = Role::all();
         return view('users.create', compact('roles', 'roles'));
     }
-
+   
     /**
      * Store a newly created resource in storage.
      *

@@ -44,9 +44,11 @@
                {{-- Check if role none --}}
                <label for="role" class="form-label">Role</label>
                <select name="role" id="role" class="form-control">
-                    @foreach ($roles as $role)
+                    @forelse ($roles as $role)
                         <option value="{{ $role->role }}">{{ $role->role }}</option>
-                    @endforeach
+                    @empty
+                        <option value="Set role later">Set role later</option>
+                    @endforelse
                </select>
                {{-- /role select --}}
 
