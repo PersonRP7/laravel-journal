@@ -16,12 +16,6 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function index()
-    // {
-    //     $users = User::all();
-    //     // return view('journal.see_all_users', compact('users', 'users'));
-    //     return view('users.see_all_users', compact('users', 'users'));
-    // }
 
     public function index()
     {
@@ -92,26 +86,6 @@ class UserController extends Controller
             return redirect('/users')->with('success', "{$user['name']} created.");
           }
     }
-    // public function store(Request $request)
-    // {
-    //     $request->validate(
-    //         ['name' => 'required|unique:users'], 
-    //         ['name.unique' => 'That name already exists.'],
-    //         ['password' => 'required|confirmed|min:6'],
-    //         ['email' => 'required|unique:users'],
-    //         ['email.required' => 'Email must be entered.'],
-    //         ['email.unique' => 'That e-mail already exists.']
-    //     );
-    //     // $user = new User([
-    //     //     'name' => $request->post('name'),
-    //     //     'email' => $request->post('email'),
-    //     //     'password' => $request->post('password'),
-    //     //     'role' => $request->post('role'),
-    //     // ]);
-
-    //     // $user->save();
-    //     // return redirect('/users')->with('success', "{$user['name']} created.");
-    // }
 
     /**
      * Display the specified resource.
@@ -121,7 +95,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('users.view', compact('user', 'user'));
     }
 
     /**
