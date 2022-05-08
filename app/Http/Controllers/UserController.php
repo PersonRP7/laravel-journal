@@ -95,7 +95,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.view', compact('user', 'user'));
+        return view('users.view', compact('user'));
     }
 
     /**
@@ -105,8 +105,12 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
+    // Components in subfolders are referenced using a period (dot) . and not a hyphen -.
     {
-        //
+        // Admin form: Edit all fields
+        // User form: edit all fields except role
+        $roles = Role::all();
+        return view('users.edit', compact('user', 'roles'));
     }
 
     /**
