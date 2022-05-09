@@ -19,7 +19,8 @@
     </div>
 
     <!-- Form -->
-    <x-roles.forms.edit-role :role='$role'/>
+    {{-- <x-roles.forms.edit-role :role='$role'/> --}}
+    <x-roles.forms.edit-role-anon :role='$role' />
     <!-- /Form -->
 
 </div>
