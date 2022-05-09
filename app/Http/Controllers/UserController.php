@@ -109,6 +109,7 @@ class UserController extends Controller
     {
         // Admin form: Edit all fields
         // User form: edit all fields except role
+        // Check user role. If admin, use admin form.
         $roles = Role::all();
         return view('users.edit', compact('user', 'roles'));
     }
