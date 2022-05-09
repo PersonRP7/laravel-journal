@@ -1,11 +1,8 @@
-@props([
-    'role',
-    'roles',
-    'user'
-])
-<div class="row mt-4 mb-4">
+@props(['roles'])
+
+ <div class="row mt-4 mb-4">
         <div class="col-md-12">
-            <form action="{{ route('users.update', $user->id) }}" method="POST">
+            <form action="{{ route('users.store') }}" method="POST">
                 @csrf
                 {{-- name --}}
                 <label for="name" class="form-label">Name</label>
@@ -40,7 +37,7 @@
                {{-- /email --}}
 
 
-            <button type="submit" class="btn btn-outline-info mt-4">Create</button>
-        </form>
+                <button type="submit" class="btn btn-outline-info mt-4">Create</button>
+            </form>
+        </div>
     </div>
-</div>
