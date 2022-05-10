@@ -111,7 +111,10 @@ class UserController extends Controller
         // User form: edit all fields except role
         // Check user role. If admin, use admin form.
         $roles = Role::all();
-        return view('users.edit', compact('user', 'roles'));
+
+        $current_user = auth()->user();
+
+        return view('users.edit', compact('user', 'roles', 'current_user'));
     }
 
     /**
