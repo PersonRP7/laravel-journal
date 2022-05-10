@@ -1,3 +1,4 @@
+{{-- This form is used by the admin type user. It allows for complete user editing. --}}
 @props(['roles', 'user'])
 
  <div class="row mt-4 mb-4">
