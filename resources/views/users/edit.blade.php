@@ -45,8 +45,9 @@
         {{-- Fixed now --}}
         @if ($current_user->role == 'admin')
             <x-users.forms.user-edit-form-admin :user='$user' :roles='$roles' />
-        @else
-            User is logged in but not an admin.
+        @elseif ($current_user->name == $user->name)
+            <x-users.forms.user-edit-form-admin :user='$current_user' :roles='$roles' />
+        {{-- TO DO: A logged in non admin user cannot edit other users. Component should be similar to guest/profile -}}
         @endif
     @endauth
     {{-- /Form --}}
