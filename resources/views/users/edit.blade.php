@@ -18,6 +18,7 @@
         </div>
     </div>
 
+    {{-- Check if none first --}}
     {{ $current_user }}
 
     <!-- Form -->
