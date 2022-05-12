@@ -23,16 +23,26 @@
 
     <!-- Form -->
     {{-- <x-users.forms.user-edit-form-admin :user='$user' :roles='$roles' /> --}}
-    @if ($user->role == 'admin')
+    {{-- @if ($user->role == 'admin') --}}
         {{-- Admin can edit every user --}}
-        <x-users.forms.user-edit-form-admin :user='$user' :roles='$roles' />
+        {{-- <x-users.forms.user-edit-form-admin :user='$user' :roles='$roles' /> --}}
     
-    @else 
+    {{-- @else  --}}
     
-        <x-users.forms.user-edit-form-user :user='$user' :roles='$roles' />
+        {{-- <x-users.forms.user-edit-form-user :user='$user' :roles='$roles' /> --}}
     
     <!-- /Form -->
-    @endif
+    {{-- @endif --}}
+
+    {{-- Form --}}
+    @guest
+        <x-users.guests.profile :user='$user' />
+    @endguest
+        
+    @auth
+        <x-users.forms.user-edit-form-admin :user='$user' :roles='$roles' />
+    @endauth
+    {{-- /Form --}}
 
 </div>
 @endsection

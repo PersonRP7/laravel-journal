@@ -1,3 +1,6 @@
+@props(['user'])
 <div>
-    <!-- He who is contented is rich. - Laozi -->
+    <p>Guests are only allowed to browse, not edit.</p>
+    <p>Name: {{ $user->name }}</p>
+    <p>Role: {{ $user->role }}</p>
 </div>
