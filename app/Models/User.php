@@ -43,8 +43,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // protected $attributes = [
+    //     'role' => 'regular',
+    // ];
     protected $attributes = [
-        'role' => 'regular',
+        'role' => 'admin',
     ];
 
     public function toAdmin()

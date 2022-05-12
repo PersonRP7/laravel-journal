@@ -40,7 +40,14 @@
     @endguest
         
     @auth
-        <x-users.forms.user-edit-form-admin :user='$user' :roles='$roles' />
+        {{-- <x-users.forms.user-edit-form-admin :user='$user' :roles='$roles' /> --}}
+        {{-- This returns an error because it checks the user instance passed to the view, not the user that's actually logged in. --}}
+        {{-- Fixed now --}}
+        @if ($current_user->role == 'admin')
+            <x-users.forms.user-edit-form-admin :user='$user' :roles='$roles' />
+        @else
+            User is logged in but not an admin.
+        @endif
     @endauth
     {{-- /Form --}}
 
