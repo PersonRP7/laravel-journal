@@ -19,7 +19,7 @@
     </div>
 
     {{-- Check if none first --}}
-    {{ $current_user }}
+    {{-- {{ $current_user }} --}}
 
     <!-- Form -->
     {{-- <x-users.forms.user-edit-form-admin :user='$user' :roles='$roles' /> --}}
@@ -47,7 +47,8 @@
             <x-users.forms.user-edit-form-admin :user='$user' :roles='$roles' />
         @elseif ($current_user->name == $user->name)
             <x-users.forms.user-edit-form-admin :user='$current_user' :roles='$roles' />
-        {{-- TO DO: A logged in non admin user cannot edit other users. Component should be similar to guest/profile -}}
+        @elseif ($current_user->name != $user->name)
+            <x-users.logged-in.not-current-users-profile :user='$current_user' :roles='$roles' />
         @endif
     @endauth
     {{-- /Form --}}
