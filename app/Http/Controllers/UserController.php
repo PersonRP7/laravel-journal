@@ -67,7 +67,7 @@ class UserController extends Controller
             'name' => 'required|unique:users|max:255',
             'password' => 'required|confirmed|min:6',
             'email' => 'required|unique:users',
-            'role' => 'required'
+            // 'role' => 'required'
           ]);
 
           if ($validator->fails()) {
@@ -79,10 +79,11 @@ class UserController extends Controller
                 'name' => $request->post('name'),
                 'email' => $request->post('email'),
                 'password' => $request->post('password'),
-                'role' => $request->post('role'),
+                // 'role' => $request->post('role'),
             ]);
 
             $user->save();
+            Auth::login($user);
             return redirect('/users')->with('success', "{$user['name']} created.");
           }
     }

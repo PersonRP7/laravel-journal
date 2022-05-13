@@ -21,14 +21,14 @@
 
                {{-- role select --}}
                {{-- Check if role none --}}
-               <label for="role" class="form-label">Role</label>
+               {{-- <label for="role" class="form-label">Role</label>
                <select name="role" id="role" class="form-control">
                     @forelse ($roles as $role)
                         <option value="{{ $role->role }}">{{ $role->role }}</option>
                     @empty
                         <option value="Set role later">Set role later</option>
                     @endforelse
-               </select>
+               </select> --}}
                {{-- /role select --}}
 
                {{-- email --}}
