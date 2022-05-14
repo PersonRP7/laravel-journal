@@ -22,14 +22,19 @@
 
                {{-- role select --}}
                {{-- Check if role none --}}
-               <label for="role" class="form-label">Role</label>
-               <select name="role" id="role" class="form-control">
-                    @forelse ($roles as $role)
-                        <option value="{{ $role->role }}">{{ $role->role }}</option>
-                    @empty
-                        <option value="Set role later">Set role later</option>
-                    @endforelse
-               </select>
+                    @if ( $roles->count() )
+                    <label for="role" class="form-label">Role</label>
+                    <select name="role" id="role" class="form-control">
+                            @forelse ($roles as $role)
+                                <option value="{{ $role->role }}">{{ $role->role }}</option>
+                            @empty
+                                <option value="Set role later">Set role later</option>
+                            @endforelse
+                    </select>
+                    @else
+                            <p>No roles have been created yet.</p>
+                            <p>Click here: <a href="{{ route('roles.create') }}">Create Roles</a></p>
+                    @endif
                {{-- /role select --}}
 
                {{-- email --}}
