@@ -7,6 +7,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -131,7 +132,36 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'nullable|unique:users|max:255',
+            'password' => 'nullable|confirmed|min:6',
+            'email' => 'nullable|unique:users',
+            'role' => 'nullable'
+          ]);
+
+          if ($validator->fails()) {
+            return redirect(route('users.edit', [$user->id]))
+                     ->withErrors($validator)
+                     ->withInput();
+          }else {
+              $user = User::find($user->id);
+              if ($request->filled('name'))
+              { $user->name = $request->name; }
+
+              if ($request->filled('password'))
+              { $user->password = Hash::make($request->password); }
+
+              if ($request->filled('email'))
+              { $user->email = $request->email; }
+
+              if ($request->filled('role'))
+              { $user->role = $request->role; }
+
+              $user->update();
+
+            return redirect('/users')->with('success', "{$user['name']} updated.");
+          }
+        
     }
 
     /**

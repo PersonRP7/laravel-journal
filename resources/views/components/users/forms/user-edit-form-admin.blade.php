@@ -5,6 +5,7 @@
         <div class="col-md-12">
             <form action="{{ route('users.update', $user->id) }}" method="POST">
                 @csrf
+                @method('PATCH')
                 {{-- name --}}
                 <label for="name" class="form-label">Name</label>
                 <input type="text" placeholder="{{ $user->name }}" name="name" class="form-control" id="name" aria-describedby="name">
