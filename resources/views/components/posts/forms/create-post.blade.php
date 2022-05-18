@@ -1,0 +1,25 @@
+{{-- @props(['user']) --}}
+
+<div class="row mt-4 mb-4">
+        <div class="col-md-12">
+            <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                {{-- title --}}
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="title" class="form-control" id="title" aria-describedby="title">
+                {{-- /title --}}
+
+                {{-- text --}}
+                <label for="text" class="form-label">Text</label>
+                <input type="text" name="text" class="form-control" id="text" aria-describedby="text">
+                {{-- /text --}}
+
+                {{-- image --}}
+                <label for="image" class="form-label">Image</label>
+                <input type="file" name="image" class="form-control" aria-describedby="image">
+                {{-- /image --}}
+
+            <button type="submit" class="btn btn-outline-info mt-4">Create</button>
+        </form>
+    </div>
+</div>

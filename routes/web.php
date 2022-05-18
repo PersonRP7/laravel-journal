@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,5 +42,9 @@ middleware(['auth'])->name('manage_users');
 Route::resource('roles', 'App\Http\Controllers\RoleController');
 
 Route::resource('users', UserController::class);
+
+Route::resource('posts', PostController::class);
+
+// Route::get('posts/hello', [PostController::class, 'hello']);
 
 require __DIR__.'/auth.php';

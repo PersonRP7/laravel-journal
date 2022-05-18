@@ -14,8 +14,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all();
+        return view('posts.list', compact('posts', 'posts'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
