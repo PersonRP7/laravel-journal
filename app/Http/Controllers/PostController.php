@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Date;
 
 class PostController extends Controller
 {
@@ -37,7 +39,53 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:posts|max:255',
+            'text' => 'nullable',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+          ]);
+
+          if ($validator->fails()) {
+            return redirect('posts/create')
+                     ->withErrors($validator)
+                     ->withInput();
+          }else {
+            // $user = new User([
+            //     'name' => $request->post('name'),
+            //     'email' => $request->post('email'),
+            //     'password' => $request->post('password'),
+            //     // 'role' => $request->post('role'),
+            // ]);
+
+            // $user->save();
+            // Auth::login($user);
+            // $user = $request->user();
+
+            // $post = new Post([
+            //     'title' => $request->post('title'),
+            //     'text' => $request->post('text'),
+            //     'name' => $request->file('image')->getClientOriginalName(); 
+            // ]);
+
+            // Initialize empty Post object
+            $post = new Post();
+            // Initialize empty Post object
+
+            // file from the form field
+            $file = $request->file('image');
+            // file from the form field
+
+            // $filename = $request->user()->from_date->format('d/m/Y').$file->getClientOriginalName();
+            $filename = $file->getClientOriginalName();
+            $file-> move(public_path('public/Image'), $filename);
+
+            $post['user_id'] = $request->user()->id;
+            $post['title'] = $request->post('title');
+            $post['text'] = $request->post('text');
+            $post['name'] = $filename;
+            $post->save();
+            return redirect('/posts')->with('success', "{$post['title']} created.");
+          }
     }
 
     /**
