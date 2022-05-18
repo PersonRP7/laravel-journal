@@ -50,22 +50,7 @@ class PostController extends Controller
                      ->withErrors($validator)
                      ->withInput();
           }else {
-            // $user = new User([
-            //     'name' => $request->post('name'),
-            //     'email' => $request->post('email'),
-            //     'password' => $request->post('password'),
-            //     // 'role' => $request->post('role'),
-            // ]);
 
-            // $user->save();
-            // Auth::login($user);
-            // $user = $request->user();
-
-            // $post = new Post([
-            //     'title' => $request->post('title'),
-            //     'text' => $request->post('text'),
-            //     'name' => $request->file('image')->getClientOriginalName(); 
-            // ]);
 
             // Initialize empty Post object
             $post = new Post();
