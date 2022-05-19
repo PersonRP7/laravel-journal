@@ -20,7 +20,12 @@
         <!-- <img src="asset('public/{{ $post->name }}')" alt=""> -->
         <!-- <img src="{{ url('') }}/public/{{$post->name}}"> -->
         <!-- <img src="{{ asset('public/' . $post->name) }}"> -->
-        <img src="{{ asset('storage/' .$post->name) }}" alt="">
+        {{-- <img src="{{ asset('public/' .$post->name) }}" alt=""> --}}
+        {{-- This works --}}
+        {{-- <img src="/images/bos.jpg" alt=""> --}}
+        {{-- /This works --}}
+        <img src="{{ $post->name }}" alt="">
+        <p>{{ $post->user->name }}</p>
         <!-- {{ $post->name }} -->
     @endforeach
 

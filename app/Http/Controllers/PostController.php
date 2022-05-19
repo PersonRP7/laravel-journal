@@ -64,6 +64,7 @@ class PostController extends Controller
 
             $filename = $file->getClientOriginalName();
             $file-> move(public_path('images/'), $filename);
+            // $file-> move('/storage/app/public/images/', $filename);
 
             $post['user_id'] = $request->user()->id;
             $post['title'] = $request->post('title');
