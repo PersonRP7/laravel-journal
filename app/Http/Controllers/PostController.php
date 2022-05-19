@@ -64,7 +64,7 @@ class PostController extends Controller
 
             // $filename = $request->user()->from_date->format('d/m/Y').$file->getClientOriginalName();
 
-            $filename = $file->getClientOriginalName();
+            $filename = Carbon::now()->toDateTimeString() . $file->getClientOriginalName();
             $file-> move(public_path('images/'), $filename);
             // $file-> move('/storage/app/public/images/', $filename);
 
@@ -72,7 +72,7 @@ class PostController extends Controller
             $post['title'] = $request->post('title');
             $post['text'] = $request->post('text');
             // $post['name'] = $filename;
-            $post['name'] = 'images/' . $request->file('image')->getClientOriginalName();
+            $post['name'] = 'images/' . Carbon::now()->toDateTimeString() . $request->file('image')->getClientOriginalName();
             $post->save();
             return redirect('/posts')->with('success', "{$post['title']} created.");
           }
