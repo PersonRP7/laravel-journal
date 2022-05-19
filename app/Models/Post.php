@@ -15,7 +15,7 @@ class Post extends Model
         'title',
         'text',
         'name',
-        'path'
+        // 'path'
     ];
 
     public function user()
