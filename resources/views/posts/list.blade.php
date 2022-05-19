@@ -15,5 +15,14 @@
     </div>
     <!-- /Alert -->
 
+    @foreach ($posts as $post)
+        <p>{{ $post->title }}</p>
+        <!-- <img src="asset('public/{{ $post->name }}')" alt=""> -->
+        <!-- <img src="{{ url('') }}/public/{{$post->name}}"> -->
+        <!-- <img src="{{ asset('public/' . $post->name) }}"> -->
+        <img src="{{ asset('storage/' .$post->name) }}" alt="">
+        <!-- {{ $post->name }} -->
+    @endforeach
+
 </div>
 @endsection

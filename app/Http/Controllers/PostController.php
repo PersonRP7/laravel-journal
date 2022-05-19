@@ -17,7 +17,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('posts.list', compact('posts', 'posts'));
+        return view('posts.list', compact('posts'));
     }
 
 
@@ -61,13 +61,15 @@ class PostController extends Controller
             // file from the form field
 
             // $filename = $request->user()->from_date->format('d/m/Y').$file->getClientOriginalName();
+
             $filename = $file->getClientOriginalName();
-            $file-> move(public_path('public/Image'), $filename);
+            $file-> move(public_path('images/'), $filename);
 
             $post['user_id'] = $request->user()->id;
             $post['title'] = $request->post('title');
             $post['text'] = $request->post('text');
-            $post['name'] = $filename;
+            // $post['name'] = $filename;
+            $post['name'] = 'images/' . $request->file('image')->getClientOriginalName();
             $post->save();
             return redirect('/posts')->with('success', "{$post['title']} created.");
           }
