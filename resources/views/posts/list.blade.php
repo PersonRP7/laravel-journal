@@ -19,6 +19,9 @@
         <p>{{ $post->title }}</p>
         <img src="{{ $post->name }}" alt="">
         <p>{{ $post->user->name }}</p>
+        {{-- post show --}}
+        <a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a>
+        {{-- /post show --}}
     @endforeach
 
 </div>
