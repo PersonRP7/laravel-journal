@@ -8,7 +8,7 @@
             <h5 class="card-title">{{ $post->title }}</h5>
             <p class="card-text">{{ $post->text }}</p>
             {{-- Edit post --}}
-            <a href="#" class="btn btn-primary">Edit post</a>
+            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">Edit post</a>
             {{-- /Edit post --}}
         </div>
         </div>
