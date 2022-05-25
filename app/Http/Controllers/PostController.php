@@ -134,7 +134,7 @@ class PostController extends Controller
             }
           }
 
-          if ($request->filled('image'))
+          if ($request->file('image'))
           {
             $post['name'] = 'images/' . Carbon::now()->toDateTimeString() . $request->file('image')->getClientOriginalName();
             $file = $request->file('image');
