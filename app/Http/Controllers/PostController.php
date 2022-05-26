@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Date;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
