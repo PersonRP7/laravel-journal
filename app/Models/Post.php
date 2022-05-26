@@ -28,10 +28,12 @@ class Post extends Model
     {
         if ($this->user->id == $user_id)
         {
-            echo "This post can be deleted.";
+            // echo "This post can be deleted.";
+            return true;
         }else
         {
-            echo "This post doesn't belong to this user";
+            // echo "This post doesn't belong to this user";
+            return false;
         }
     }
 }

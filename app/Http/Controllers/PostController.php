@@ -177,6 +177,14 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        if ($this->allowDelete(Auth::id))
+        {
+          $this->delete();
+          return redirect('/posts')->with('success', "{$post['title']} deleted.");
+        }
+        else
+        {
+          return redirect('/post')->with('error', 'Cannot delete. Post does not belong to the current user.');
+        }
     }
 }
