@@ -22,4 +22,16 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // Another argument for post_id?
+    public function allowDelete($user_id)
+    {
+        if ($this->user->id == $user_id)
+        {
+            echo "This post can be deleted.";
+        }else
+        {
+            echo "This post doesn't belong to this user";
+        }
+    }
 }
