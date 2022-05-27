@@ -177,9 +177,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if ($this->allowDelete(Auth::id))
+        if ($post->allowDelete(Auth::id()))
         {
-          $this->delete();
+          $post->delete();
           return redirect('/posts')->with('success', "{$post['title']} deleted.");
         }
         else
