@@ -10,17 +10,25 @@
 
 
                         
-                {{-- Edit post --}}
-                <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">Edit post</a>
-                {{-- /Edit post --}}
+                <div class="row">
 
-                {{-- Delete post --}}
-                <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-outline-danger">Delete</button>
-                </form>
-                {{-- /Delete post --}}
+                    <div class="col">
+                        {{-- Edit post --}}
+                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">Edit post</a>
+                        {{-- /Edit post --}}
+                    </div>
+
+                    <div class="col">
+                        {{-- Delete post --}}
+                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-outline-danger">Delete</button>
+                        </form>
+                        {{-- /Delete post --}}
+                    </div>
+
+                </div>
 
                 </div>
         </div>
