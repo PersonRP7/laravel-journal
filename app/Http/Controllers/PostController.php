@@ -98,7 +98,15 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        // return view('posts.edit', compact('post'));
+        if ($post->allowDelete(Auth::id()))
+        {
+          return view('posts.edit', compact('post'));
+        }
+        else
+        {
+          return redirect('/posts')->with('error', 'Cannot access. Post does not belong to the current user.');
+        }
     }
 
     /**
@@ -160,7 +168,7 @@ class PostController extends Controller
         }
         else
         {
-          return redirect('/post')->with('error', 'Cannot delete. Post does not belong to the current user.');
+          return redirect('/posts')->with('error', 'Cannot delete. Post does not belong to the current user.');
         }
     }
 }

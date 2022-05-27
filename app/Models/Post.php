@@ -23,7 +23,7 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Another argument for post_id?
+    #Used by the edit method as well.
     public function allowDelete($user_id)
     {
         if ($this->user->id == $user_id)
