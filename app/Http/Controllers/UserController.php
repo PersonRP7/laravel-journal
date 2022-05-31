@@ -182,6 +182,14 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if ($user->allowDelete(Auth::id()))
+        {
+          $user->delete();
+          return redirect('/users')->with('success', "{$user['name']} deleted.");
+        }
+        else
+        {
+          return redirect('/users')->with('error', 'Cannot delete.');
+        }
     }
 }
