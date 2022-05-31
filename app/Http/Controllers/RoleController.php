@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Role;
 
+#Add access control
 class RoleController extends Controller
 {
     /**

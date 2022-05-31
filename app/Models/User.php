@@ -64,14 +64,17 @@ class User extends Authenticatable
     }
 
     public function allowDelete($user_id)
+    #Allow admin to delete other users
     {
         if ($this->id == $user_id)
         {
-            // echo "This post can be deleted.";
             return true;
-        }else
+        }
+        elseif (User::find($user_id)->role == 'admin') {
+            return true;
+        }
+        else
         {
-            // echo "This post doesn't belong to this user";
             return false;
         }
     }
