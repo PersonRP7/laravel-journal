@@ -63,4 +63,17 @@ class User extends Authenticatable
         $this->save();
     }
 
+    public function allowDelete($user_id)
+    {
+        if ($this->id == $user_id)
+        {
+            // echo "This post can be deleted.";
+            return true;
+        }else
+        {
+            // echo "This post doesn't belong to this user";
+            return false;
+        }
+    }
+
 }
