@@ -27,6 +27,7 @@ class UserController extends Controller
     public function my_profile(Request $request)
     {
         // $user = $request->user;
+        #Add foreign keys to posts
         $user = Auth::user();
         return view('users.my_profile', compact('user', 'user'));
     }
@@ -52,8 +53,17 @@ class UserController extends Controller
     public function create()
     {
         // use the isEmpty property on the collection
-        $roles = Role::all();
-        return view('users.create', compact('roles', 'roles'));
+        // $roles = Role::all();
+        // return view('users.create', compact('roles', 'roles'));
+        if (Auth::check())
+        {
+          $roles = Role::all();
+          return view('users.create', compact('roles', 'roles'));
+        }
+        else
+        {
+          return redirect('/login');
+        }
     }
    
     /**
