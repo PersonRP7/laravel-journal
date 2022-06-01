@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 use App\Models\Post;
 
 class User extends Authenticatable
@@ -63,6 +65,17 @@ class User extends Authenticatable
         $this->save();
     }
 
+    public static function findOrFalse($user_id)
+    {
+
+        try { 
+             User::findOrFail($user_id)->role == 'admin';
+             return true;
+        } catch (\Throwable $e) {
+              return false;
+        }
+    }
+
     public function allowDelete($user_id)
     #Allow admin to delete other users
     {
@@ -70,7 +83,7 @@ class User extends Authenticatable
         {
             return true;
         }
-        elseif (User::find($user_id)->role == 'admin') {
+        elseif (User::findOrFalse($user_id)) {
             return true;
         }
         else
