@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 #Add access control
 class RoleController extends Controller
@@ -24,9 +25,18 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    #Redirect if user not logged in
     public function create()
     {
-        return view('roles.create');
+        // return view('roles.create');
+        if (Auth::check())
+        {
+          return view('roles.create');
+        }
+        else
+        {
+          return redirect('/login');
+        }
     }
 
     /**
@@ -71,7 +81,15 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return view('roles.edit',compact('role'));
+        // return view('roles.edit',compact('role'));
+        if (Auth::check())
+        {
+          return view('roles.edit', compact('role'));
+        }
+        else
+        {
+          return redirect('/login');
+        }
     }
 
     /**
@@ -105,7 +123,16 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        $role->delete();
-        return redirect('/roles')->with('success', 'Role deleted.');
+        // $role->delete();
+        // return redirect('/roles')->with('success', 'Role deleted.');
+        if (Auth::check())
+        {
+          $role->delete();
+          return redirect('/roles')->with('success', 'Role deleted.');
+        }
+        else
+        {
+          return redirect('/login');
+        }
     }
 }
