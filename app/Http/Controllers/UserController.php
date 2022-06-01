@@ -189,7 +189,7 @@ class UserController extends Controller
         }
         else
         {
-          return redirect('/users')->with('error', 'Cannot delete.');
+          return redirect('/users')->with('error', 'Cannot delete. Check permissions.');
         }
     }
 }

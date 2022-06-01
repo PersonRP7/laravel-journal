@@ -4,15 +4,11 @@
 <div class="container w-75">
 
     <!-- Alert -->
-    <div class="row mt-4 mb-4">
-        <div class="col text-center">
-            @if ($message = Session::get('success'))
-            <div class="alert alert-success">
-                <p>{{ $message }}</p>
-            </div>
-            @endif
-        </div>
-    </div>
+    @if ($message = Session::get('success'))
+        <x-general-alert type="success" :message="$message" class="mt-4"/>
+    @elseif ($message = Session::get('error'))
+        <x-general-alert type="warning" :message="$message" class="mt-4"/>
+    @endif
     <!-- /Alert -->
 
     <!-- Create Form  -->
