@@ -35,6 +35,9 @@ Route::get('/dashboard', function () {
 Route::get('/my_profile', [UserController::class, 'my_profile'])->
 middleware(['auth'])->name('my_profile');
 
+Route::get('/my_posts', [UserController::class, 'my_posts'])->
+middleware(['auth'])->name('my_posts');
+
 // Route::get('/manage_users', [UserController::class, 'manage_users'])->
 // middleware(['auth'])->name('manage_users');
 

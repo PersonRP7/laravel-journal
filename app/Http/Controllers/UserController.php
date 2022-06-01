@@ -35,18 +35,10 @@ class UserController extends Controller
 
     public function my_posts(Request $request)
     {
-        if (Auth::check())
-        {
-          // $roles = Role::all();
-          // return view('users.create', compact('roles', 'roles'));
-          $user = Auth::user();
-          $posts = $user->posts;
-          return view('users.my_posts', compact('posts'));
-        }
-        else
-        {
-          return redirect('/login');
-        }
+
+        $user = Auth::user();
+        $posts = $user->posts;
+        return view('users.my_posts', compact('posts'));
     }
 
     public function manage_users(Request $request)
