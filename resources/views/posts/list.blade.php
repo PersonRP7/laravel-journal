@@ -14,7 +14,11 @@
     <!-- /Alert -->
 
     <!-- Create new post if logged in -->
-
+    <div class="row mt-4 mb-4">
+        <div class="col text-center">
+            <a class="btn btn-outline-info" href="{{ route('posts.create') }}">Create</a>
+        </div>
+    </div>
     <!-- /Create new post if logged in -->
 
 

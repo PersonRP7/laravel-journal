@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-{{ $user }}
+{{-- {{ $user }} --}}
+<x-posts.cards.posts-by-user :posts="$posts" />
 @endsection
