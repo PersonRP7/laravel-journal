@@ -29,8 +29,24 @@ class UserController extends Controller
         // $user = $request->user;
         #Add foreign keys to posts
         $user = Auth::user();
-        $posts = $user->posts;
-        return view('users.my_profile', compact('user', 'posts'));
+        // $posts = $user->posts;
+        return view('users.my_profile', compact('user'));
+    }
+
+    public function my_posts(Request $request)
+    {
+        if (Auth::check())
+        {
+          // $roles = Role::all();
+          // return view('users.create', compact('roles', 'roles'));
+          $user = Auth::user();
+          $posts = $user->posts;
+          return view('users.my_posts', compact('posts'));
+        }
+        else
+        {
+          return redirect('/login');
+        }
     }
 
     public function manage_users(Request $request)
