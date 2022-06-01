@@ -20,7 +20,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+
+
+          {{-- <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ route('users.index') }}">Users</a>
           </li>
           <li class="nav-item">
@@ -29,7 +31,36 @@
 
           <li class="nav-item">
             <a class="nav-link" href="{{ route('posts.index') }}">Posts</a>
-          </li>
+          </li> --}}
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Users
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{{ route('users.index') }}">List Users</a></li>
+              <li><a class="dropdown-item" href="{{ route('users.create') }}">Create user</a></li>
+            </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Roles
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{{ route('roles.index') }}">List Roles</a></li>
+              <li><a class="dropdown-item" href="{{ route('roles.create') }}">Create role</a></li>
+            </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Posts
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{{ route('posts.index') }}">List Posts</a></li>
+              <li><a class="dropdown-item" href="{{ route('posts.create') }}">Create posts</a></li>
+            </ul>
+        </li>
 
 
         </ul>
