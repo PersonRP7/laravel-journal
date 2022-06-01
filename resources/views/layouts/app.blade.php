@@ -47,7 +47,7 @@
           <a href="{{ route('register') }}" class="nav-link">Register</a>
         @else
           <!-- <a href="#" class="nav-link">My Profile</a> -->
-            <a href="#" class="nav-link">My Profile</a>
+            <a href="{{ route('my_profile') }}" class="nav-link">My Profile</a>
 
             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
             

@@ -14,6 +14,16 @@
             <!-- /User data column -->
         </div>
         <!-- /first row -->
+
+        <!-- second row (edit profile) -->
+        <div class="row">
+            <p>Edit profile</p><hr>
+            <div>
+                <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">Edit Profile</a>
+            </div>
+        </div>
+        <!-- /second row (edit profile) -->
+
     </div>
     <!-- /main container -->
 
