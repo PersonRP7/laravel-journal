@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-Hello posts
+<x-posts.cards.my-posts :posts="$posts" />
 @endsection

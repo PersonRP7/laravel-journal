@@ -41,18 +41,18 @@ class UserController extends Controller
         return view('users.my_posts', compact('posts'));
     }
 
-    public function manage_users(Request $request)
-    {
-        $users = User::all();
-        return view('users.manage_users', compact('users', 'users'));
-    }
+    // public function manage_users(Request $request)
+    // {
+    //     $users = User::all();
+    //     return view('users.manage_users', compact('users', 'users'));
+    // }
 
-    public function see_all_users()
-    {
-        $users = User::all();
-        // return view('journal.see_all_users', compact('users', 'users'));
-        return view('users.see_all_users', compact('users', 'users'));
-    }
+    // public function see_all_users()
+    // {
+    //     $users = User::all();
+    //     // return view('journal.see_all_users', compact('users', 'users'));
+    //     return view('users.see_all_users', compact('users', 'users'));
+    // }
 
     /**
      * Show the form for creating a new resource.
