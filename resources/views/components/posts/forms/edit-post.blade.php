@@ -12,7 +12,7 @@
 
                 {{-- text --}}
                 <label for="text" class="form-label">Text</label>
-                <input type="text" placeholder="{{ $post->title }}" name="text" class="form-control" id="text" aria-describedby="text">
+                <input type="text" placeholder="{{ $post->text }}" name="text" class="form-control" id="text" aria-describedby="text">
                 {{-- /text --}}
 
                 {{-- image --}}
