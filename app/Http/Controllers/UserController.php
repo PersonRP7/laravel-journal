@@ -98,7 +98,7 @@ class UserController extends Controller
             $user = new User([
                 'name' => $request->post('name'),
                 'email' => $request->post('email'),
-                'password' => $request->post('password'),
+                'password' => Hash::make($request->password)
                 // 'role' => $request->post('role'),
             ]);
 
