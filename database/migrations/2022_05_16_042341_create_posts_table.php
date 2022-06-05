@@ -16,7 +16,10 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             // Fk
-            $table->integer('user_id')->unsigned()->nullable();
+            // previous
+            // $table->integer('user_id')->unsigned()->nullable();
+            // previous
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             // Fk
 
