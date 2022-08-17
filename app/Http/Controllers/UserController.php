@@ -24,10 +24,13 @@ class UserController extends Controller
         return view('users.list', compact('users', 'users'));
     }
 
+    #Korisnik ovdje dolazi nakon registracije.
     public function my_profile(Request $request)
     {
         // $user = $request->user;
         #Add foreign keys to posts
+
+        #Auth fasada puthem statične user metode daje trenutnog korisnika.
         $user = Auth::user();
         // $posts = $user->posts;
         return view('users.my_profile', compact('user'));
