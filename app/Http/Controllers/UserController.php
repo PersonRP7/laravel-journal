@@ -36,9 +36,12 @@ class UserController extends Controller
         return view('users.my_profile', compact('user'));
     }
 
+    #Svi postovi koji pripadaju korisniku.
     public function my_posts(Request $request)
     {
 
+        #Trenutni korisnik putem Auth fasade.
+        # Posts foreign key querying.
         $user = Auth::user();
         $posts = $user->posts;
         return view('users.my_posts', compact('posts'));
