@@ -19,6 +19,8 @@ class PostController extends Controller
      */
     public function index()
     {
+        //Svi postovi su prikazani.
+        //Za vecu aplikaciju potrebna je paginacija.
         $posts = Post::all();
         return view('posts.list', compact('posts'));
     }
@@ -33,6 +35,11 @@ class PostController extends Controller
     {
         // return view('posts.create');
         if (Auth::check())
+        //Samo ulogirani korisnici mogu stvarati postove.
+        //Laravel komponenta stvara upload formu ako je korisnik ulogiran.
+        //resources/views/components/posts - Lokacija komponente
+        //resources/views/posts Lokacija blade template-a.
+        //Ako nije, create metoda vrsi redirect na login.
         {
           return view('posts.create');
         }
@@ -50,12 +57,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        //Validator fasada preuzima podatke iz request-a i provjerava 
+        //je li upload prihvatljiv zadanoj logici.
         $validator = Validator::make($request->all(), [
             'title' => 'required|unique:posts|max:255',
             'text' => 'nullable',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
           ]);
 
+          //U slucaju greske, dolazi do redirecta na istu stranicu ali 
+          //sa ubrizganim greskama u kontekst.
           if ($validator->fails()) {
             return redirect('posts/create')
                      ->withErrors($validator)
@@ -63,19 +74,38 @@ class PostController extends Controller
           }else {
 
 
+          //Inicijalizacija novog Post objekta.
             // Initialize empty Post object
             $post = new Post();
             // Initialize empty Post object
 
             // file from the form field
+            //Na formi je obavezno naznaciti enctype="multipart/form-data" kako bi file metoda
+            //mogla funkcionirati.
             $file = $request->file('image');
             // file from the form field
 
             // $filename = $request->user()->from_date->format('d/m/Y').$file->getClientOriginalName();
 
+            //Za jedinstvenost naziva posta koristi se Carbon klasa i staticka metoda now
+            //koja prolazi kroz toDateTimeString kako bi se DateTime format pretvorio u string.
+            //Onda se putem dot konkatenatora zbog deskriptivnosti DateTime stringu dodaje 
+            //prvobitni naziv uploadane slike.
             $filename = Carbon::now()->toDateTimeString() . $file->getClientOriginalName();
+
+            //Novo uploadana slika je pomaknuta u images folder. Npr. na heroku-u bi to bio problem
+            //zbog koristenja privremenog filesystema. Ovisno o deployment tipu koji se koristi te 
+            //obliku i velicini aplikacije nije uvijek moguce koristiti local file storage, vec je
+            //potrebno koristiti dedicated servis kao Amazon S3 za koji vec postoji composer paket.
+            //Za slucaj da se koristi local filesystem potrebno je konfigurirati Apache/nginx 
+            //da prikazuje staticki sadrzaj. 
+
             $file-> move(public_path('images/'), $filename);
             // $file-> move('/storage/app/public/images/', $filename);
+
+            //Dodavanje podataka u novostvoreni Post objekt.
+            //Ista procedura sa Carbon klasom i getClientOriginalName kako bi sami staticki
+            //dokument korespondirao Post objektu koji sluzi kao njegov akcesor.
 
             $post['user_id'] = $request->user()->id;
             $post['title'] = $request->post('title');
@@ -83,6 +113,7 @@ class PostController extends Controller
             // $post['name'] = $filename;
             $post['name'] = 'images/' . Carbon::now()->toDateTimeString() . $request->file('image')->getClientOriginalName();
             $post->save();
+            //Redirect na posts sa success porukom ubrizganom u kontekst.
             return redirect('/posts')->with('success', "{$post['title']} created.");
           }
     }
