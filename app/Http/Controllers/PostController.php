@@ -126,6 +126,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        //Post je ubrizgan u kontekst i vidljiv je svakome.
         return view('posts.view', compact('post'));
     }
 
@@ -138,6 +139,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         // return view('posts.edit', compact('post'));
+        //allowDelete Post metod koristi Auth fasadu kako bi provjerila 
+        //je li trenutno ulogirani korisnik autor Post instance.
         if ($post->allowDelete(Auth::id()))
         {
           return view('posts.edit', compact('post'));
@@ -157,6 +160,10 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+      //Slicna metoda kao i create ali je potrebno prvo pronaci postojecu instancu.
+      //Posto se Post objekt sastoji od tekstualnog i datotecnog sadrzaja, update Validator
+      //je permisivniji nego create validator kako bi omogucio modificiranje samo teksta / 
+      // slike ili oboje.
         $validator = Validator::make($request->all(), [
             'title' => 'nullable|unique:posts|max:255',
             'text' => 'nullable',
@@ -171,6 +178,8 @@ class PostController extends Controller
 
           $textFields = ["title", "text"];
   
+          //foreach petlja kako ne bi morali duplicirati update logiku za svako
+          //tekstualno polje.
           foreach ($textFields as $textField) {
             if ($request->filled($textField))
             {
@@ -178,6 +187,7 @@ class PostController extends Controller
             }
           }
 
+          //Ako se u requestu nalazi datoteka, koristi se ista logika kao i u create metodi.
           if ($request->file('image'))
           {
             $post['name'] = 'images/' . Carbon::now()->toDateTimeString() . $request->file('image')->getClientOriginalName();
@@ -187,6 +197,7 @@ class PostController extends Controller
           }
 
           $post->save();
+          //Post je sacuvan i dolazi do redirecta sa success porukom ubrizganom u kontekst.
 
             return redirect('/posts')->with('success', "{$post['title']} updated.");
           }
@@ -200,6 +211,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        //Metoda provjerava pripada li trenutna Post instanca trenutno ulogiranom korisniku
         if ($post->allowDelete(Auth::id()))
         {
           $post->delete();
