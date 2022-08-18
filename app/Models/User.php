@@ -55,6 +55,9 @@ class User extends Authenticatable
     // protected $attributes = [
     //     'role' => 'regular',
     // ];
+
+    //Svaki novi korisnik automatski postaje admin radi lakoce koristenja aplikacije.
+    //U stvarnom slucaju bi to bilo obrnuto.
     protected $attributes = [
         'role' => 'admin',
     ];
