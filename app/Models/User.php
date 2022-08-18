@@ -65,6 +65,7 @@ class User extends Authenticatable
         $this->save();
     }
 
+    // Koristi se u allowDelete metodi
     public static function findOrFalse($user_id)
     {
 
@@ -76,18 +77,26 @@ class User extends Authenticatable
         }
     }
 
+    //Koristi se u UserController/destroy
+    //
     public function allowDelete($user_id)
     #Allow admin to delete other users
     {
         if ($this->id == $user_id)
         {
+            //Ako je id trenutačne user instance jednak id-u korisničke ulogiranog korisnika
+            //metoda vraća true kako bi omogućila brisanje vlastitog korisničkog profila.
             return true;
         }
         elseif (User::findOrFalse($user_id)) {
+            //Ako je trenutačno ulogirani korisnik admin, metoda vraća true kako bi omogućila
+            //brisanje vlastitog, kao i tuđih profila.
             return true;
         }
         else
         {
+            //Ako nijedan od gore navedenih slučajeva ne odgovara, metoda vraća false i onemogućava
+            //brisanje korisničkog profila.
             return false;
         }
     }
