@@ -65,11 +65,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         // use the isEmpty property on the collection
         // $roles = Role::all();
         // return view('users.create', compact('roles', 'roles'));
+
+        //Auth provjerava postoji li korisnik.
+
         if (Auth::check())
         {
           $roles = Role::all();
@@ -89,6 +93,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+      //Stvaranje novog korisnika putem Validator fasade.
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:users|max:255',
             'password' => 'required|confirmed|min:6',
@@ -96,11 +101,16 @@ class UserController extends Controller
             // 'role' => 'required'
           ]);
 
+          //U slučaju greške, redirect na create sa prikazanim greškama.
           if ($validator->fails()) {
             return redirect('users/create')
                      ->withErrors($validator)
                      ->withInput();
           }else {
+
+            //Ako je OK, stvara se novi korisnik u DB.
+            //Uvijek je bitno koristiti Hash fasadu za spremanje lozinke.
+
             $user = new User([
                 'name' => $request->post('name'),
                 'email' => $request->post('email'),
@@ -108,6 +118,8 @@ class UserController extends Controller
                 // 'role' => $request->post('role'),
             ]);
 
+            //Nakon uspješnog spremanja korisnika u DB, dešava se redirect na users/index
+            // i korisnik se putem Auth fasade automatski ulogira.
             $user->save();
             Auth::login($user);
             return redirect('/users')->with('success', "{$user['name']} created.");
@@ -122,6 +134,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+      //Prikazuje trenutnog korisnika i putem foreign key queryina njegove postove.
         $posts = $user->posts;
         return view('users.view', compact('user', 'posts'));
     }
@@ -142,6 +155,12 @@ class UserController extends Controller
         // Admin can edit everyone's pages
         // User can only edit his own page
 
+        // U template kojim upravlja ovaj controller ubrizgane su 3 varijable.
+        // korisnik koji se editira, trenutni korisnik i uloge.
+        // Template logika određuje koja komponenta će renderirati formu.
+        // Sama struktura forme određuje da korisnici koji nisu admin nemogu izmjenjivati
+        // vlastitu ulogu niti druge korisnike. To može samo admin.
+
         $roles = Role::all();
 
         $current_user = auth()->user();
@@ -158,6 +177,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        
         $validator = Validator::make($request->all(), [
             'name' => 'nullable|unique:users|max:255',
             'password' => 'nullable|confirmed|min:6',
