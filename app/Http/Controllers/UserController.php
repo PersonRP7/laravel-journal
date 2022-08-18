@@ -177,7 +177,8 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        
+        //Kontroller koji upravlja requestom uzima postane podatke iz
+        //requesta i šalje ih dalje Validator fasadi koji provodi zadanu logiku.
         $validator = Validator::make($request->all(), [
             'name' => 'nullable|unique:users|max:255',
             'password' => 'nullable|confirmed|min:6',
@@ -185,6 +186,12 @@ class UserController extends Controller
             'role' => 'nullable'
           ]);
 
+          // U slučaju greške pri validaciji, dolazi do redirektiranja na istu stranicu,
+          // pomoću id-a korisničke instance koja je poslana metodi kao argument.
+
+          //Ako je validacija uspješna, statička metoda find pronalazi korisnika
+          //u bazi podataka putem user id-a i vrši update i nakon toga redirect na users
+          //sa success porukom ubrizganom u kontekst.
           if ($validator->fails()) {
             return redirect(route('users.edit', [$user->id]))
                      ->withErrors($validator)
