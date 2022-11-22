@@ -56,9 +56,9 @@ class User extends Authenticatable
     //     'role' => 'regular',
     // ];
 
-    //Svaki novi korisnik automatski postaje admin radi lakoce koristenja aplikacije.
-    //U stvarnom slucaju bi to bilo obrnuto.
     protected $attributes = [
+        //Every new user is automatically created as admin to make it simpler to use the application.
+        //Real usecase would be opposite.
         'role' => 'admin',
     ];
 
@@ -68,10 +68,9 @@ class User extends Authenticatable
         $this->save();
     }
 
-    // Koristi se u allowDelete metodi
     public static function findOrFalse($user_id)
     {
-
+        //Used in the allowDelete method
         try { 
              User::findOrFail($user_id)->role == 'admin';
              return true;
@@ -80,26 +79,26 @@ class User extends Authenticatable
         }
     }
 
-    //Koristi se u UserController/destroy
-    //
     public function allowDelete($user_id)
-    #Allow admin to delete other users
+    //Allow admin to delete other users
+    //Used in the UserController/destroy
     {
         if ($this->id == $user_id)
         {
-            //Ako je id trenutačne user instance jednak id-u korisničke ulogiranog korisnika
-            //metoda vraća true kako bi omogućila brisanje vlastitog korisničkog profila.
+            //If the id of the current user instance is equal to the id of the currently logged in
+            //user, the method returns true to allow the deletion of the current user profile.
             return true;
         }
         elseif (User::findOrFalse($user_id)) {
-            //Ako je trenutačno ulogirani korisnik admin, metoda vraća true kako bi omogućila
-            //brisanje vlastitog, kao i tuđih profila.
+            //If the currently logged in user is an admin, the method returns true to allow
+            //the deletion of own as well as other profiles.
             return true;
         }
         else
         {
-            //Ako nijedan od gore navedenih slučajeva ne odgovara, metoda vraća false i onemogućava
-            //brisanje korisničkog profila.
+  
+            //If none of the cases are true, the method returns false and disallows
+            //the user profile deletion.
             return false;
         }
     }
