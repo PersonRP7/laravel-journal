@@ -27,8 +27,7 @@ class Post extends Model
     #Used by the edit method as well.
     public function allowDelete($user_id)
     {
-        //Metoda se koristi u PostController i provjerava pripada li trenutacna
-        //korisnicka instanca korisniku koji je ulogiran.
+        //Checkf for the creator
         if ($this->user->id == $user_id)
         {
             // echo "This post can be deleted.";
