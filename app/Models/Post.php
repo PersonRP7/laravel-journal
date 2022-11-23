@@ -20,7 +20,7 @@ class Post extends Model
 
     public function user()
     {
-        #Foreign key definicija.
+        
         return $this->belongsTo(User::class);
     }
 
